@@ -1,0 +1,40 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "backend part of diploma project at Yandex Practicum",
+  "main": "application/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint .",
+    "start": "PORT=3000 node application/server.js",
+    "dev": "nodemon application/server.js",
+    "debug": "nodemon --inspect-brk application/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NNastish/movies-explorer-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "nodemon": "^2.0.9"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "celebrate": "^15.0.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.3.0",
+    "express-winston": "^4.1.0",
+    "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.7",
+    "validator": "^13.6.0",
+    "winston": "^3.3.3"
+  }
+}
