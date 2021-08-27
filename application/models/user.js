@@ -22,30 +22,26 @@ const userSchema = new mongoose.Schema({
     maxlength: 30,
   },
 });
-// eslint-disable-next-line
-userSchema.statics.findUserByCredentials = function (email, password) {
-  return this.findOne({ email }).select('+password')
-    .then((user) => {
-      if (!user) {
-        throw new AuthError(loginErrorMessage);
-      }
-      return bcrypt.compare(password, user.password)
-        .then((matched) => {
-          if (!matched) {
-            throw new AuthError(loginErrorMessage);
-          }
-          return user;
-        });
-    });
-};
-// eslint-disable-next-line
-userSchema.statics.createUserWithHashPass = function (req) {
-  return bcrypt.hash(req?.body?.password, 10)
-    .then((hash) => this.create({
-      email: req.body.email,
-      password: hash,
-      name: req.body.name,
-    }));
-};
+
+userSchema.statics.findUserByCredentials = (email, password) => this.findOne({ email }).select('+password')
+  .then((user) => {
+    if (!user) {
+      throw new AuthError(loginErrorMessage);
+    }
+    return bcrypt.compare(password, user.password)
+      .then((matched) => {
+        if (!matched) {
+          throw new AuthError(loginErrorMessage);
+        }
+        return user;
+      });
+  });
+
+userSchema.statics.createUserWithHashPass = (req) => bcrypt.hash(req?.body?.password, 10)
+  .then((hash) => this.create({
+    email: req.body.email,
+    password: hash,
+    name: req.body.name,
+  }));
 
 module.exports = mongoose.model('user', userSchema);

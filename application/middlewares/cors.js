@@ -2,6 +2,8 @@
 const ALLOWED_CORS = process.env.ALLOWED_CORS ? process.env.ALLOWED_CORS.split(', ') : [
   'http://localhost:3000',
   'https://localhost:3000',
+  'https://movies-explore.nomoredomains.monster',
+  'http://movies-explore.nomoredomains.monster',
 ];
 
 const DEFAULT_ALLOWED_METHODS = 'GET,PATCH,POST,DELETE';
