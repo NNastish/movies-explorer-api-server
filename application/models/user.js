@@ -40,7 +40,7 @@ userSchema.statics.findUserByCredentials = function (email, password) {
 };
 
 userSchema.statics.createUserWithHashPass = function (req) {
-  bcrypt.hash(req?.body?.password, 10)
+  return bcrypt.hash(req?.body?.password, 10)
     .then((hash) => this.create({
       email: req.body.email,
       password: hash,
