@@ -32,18 +32,7 @@ module.exports.createMovie = async (req, res, next) => {
       owner: req.user._id,
     });
     res.send({
-      country: movie.country,
-      director: movie.director,
-      duration: movie.duration,
-      year: movie.year,
-      description: movie.description,
-      image: movie.image,
-      trailer: movie.trailer,
-      nameRU: movie.nameRU,
-      nameEN: movie.nameEN,
-      thumbnail: movie.thumbnail,
-      movieId: movie.movieId,
-      owner: movie.owner,
+      movie
     });
   } catch (e) {
     next(new BadRequestError(invalidDataMessage));
