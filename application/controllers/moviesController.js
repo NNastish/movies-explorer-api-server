@@ -31,9 +31,7 @@ module.exports.createMovie = async (req, res, next) => {
       movieId,
       owner: req.user._id,
     });
-    res.send({
-      movie
-    });
+    res.send(movie);
   } catch (e) {
     next(new BadRequestError(invalidDataMessage));
   }
