@@ -33,7 +33,7 @@ module.exports.createMovie = async (req, res, next) => {
       movieId,
       owner: req.user._id,
     };
-    const existingMovie = Movie.find({ movieId: params.movieId, owner: params.owner });
+    const existingMovie = Movie.findOne({ movieId: params.movieId, owner: params.owner });
     if (!existingMovie) {
         const movie = await Movie.create(params);
         res.send(movie);
