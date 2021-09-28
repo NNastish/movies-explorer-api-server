@@ -10,10 +10,9 @@ module.exports.getUserInfo = async (req, res, next) => {
   try {
     const { _id: id } = req.user;
     const user = await User.findById(id).orFail(new NotFoundError(notFoundMessage));
-    res.status(200).send({
-      email: user.email,
-      name: user.name,
-    });
+    res.status(200).send(user);
+
+    
   } catch (e) {
     next(e);
   }
