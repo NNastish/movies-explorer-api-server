@@ -8,7 +8,7 @@ module.exports.getMovies = (req, res, next) => {
   Movie.find({})
     .populate('owner')
     .then((movies) => {
-      const filteredByOwner = movies.filter((movie) => movie.owner.toString() === req.user._id);
+      const filteredByOwner = movies.filter((movie) => movie.owner === req.user._id);
       res.status(200).send(filteredByOwner);
     })
     .catch(next);
