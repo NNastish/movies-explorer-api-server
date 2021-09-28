@@ -33,13 +33,19 @@ module.exports.createMovie = async (req, res, next) => {
       movieId,
       owner: req.user._id,
     };
-    const existingMovie = Movie.findOne({ movieId: params.movieId, owner._id: req.user._id });
-    if (!existingMovie) {
-        const movie = await Movie.create(params);
-        res.send(movie);
+    const existingMovies = Movie.find({ movieId: params.movieId });
+    if (existingMovies.some((movie) => movie.owner.toString() === req.user._id)) {
+      res.send(params);
     } else {
-      res.send(existingMovie);
+      const movie = await Movie.create(params);
+      res.send(movie);
     }
+    // if (!existingMovie) {
+    //     const movie = await Movie.create(params);
+    //     res.send(movie);
+    // } else {
+    //   res.send(existingMovie);
+    // }
   } catch (e) {
     next(new BadRequestError(invalidDataMessage));
   }
