@@ -9,7 +9,7 @@ module.exports.getMovies = (req, res, next) => {
     .populate('owner')
     .then((movies) => {
       const filteredByOwner = movies.filter((movie) => movie.owner._id === req.user._id);
-      res.status(200).send(filteredByOwner);
+      res.status(200).send(movies);
     })
     .catch(next);
 };
