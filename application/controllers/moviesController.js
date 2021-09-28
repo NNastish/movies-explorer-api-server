@@ -19,7 +19,7 @@ module.exports.createMovie = async (req, res, next) => {
       country, director, duration, year, description, image, trailer,
       nameRU, nameEN, thumbnail, movieId,
     } = req.body;
-    const movie = await Movie.create({
+    const params = {
       country,
       director,
       duration,
@@ -32,8 +32,14 @@ module.exports.createMovie = async (req, res, next) => {
       thumbnail,
       movieId,
       owner: req.user._id,
-    });
-    res.send(movie);
+    };
+    const existingMovie = Movie.find({ movieId: params.movieId, owner: params.owner });
+    if (!existingMovie) {
+        const movie = await Movie.create(params);
+        res.send(movie);
+    } else {
+      res.send(existingMovie);
+    }
   } catch (e) {
     next(new BadRequestError(invalidDataMessage));
   }
