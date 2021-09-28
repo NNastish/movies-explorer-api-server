@@ -40,14 +40,9 @@ module.exports.createMovie = async (req, res, next) => {
       const movie = await Movie.create(params);
       res.send(movie);
     }
-    // if (!existingMovie) {
-    //     const movie = await Movie.create(params);
-    //     res.send(movie);
-    // } else {
-    //   res.send(existingMovie);
-    // }
   } catch (e) {
-    next(new BadRequestError(invalidDataMessage));
+    next(new NotFoundError(invalidDataMessage));
+    // next(new BadRequestError(invalidDataMessage));
   }
 };
 
