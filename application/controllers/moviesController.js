@@ -44,10 +44,7 @@ module.exports.createMovie = async (req, res, next) => {
 module.exports.deleteMovie = async (req, res, next) => {
   try {
     const { movieId } = req.params;
-    const isString = typeof movieId === 'string';
-    const movie = isString
-      ? await Movie.findById(movieId).orFail(new NotFoundError(movieNotFoundMessage))
-      : await Movie.find({ movieId });
+    const movie = await Movie.findById(movieId).orFail(new NotFoundError(movieNotFoundMessage))
     if (movie.owner.toString() === req.user._id) {
       const deleted = await Movie.findByIdAndDelete(movie._id);
       res.send(deleted);
